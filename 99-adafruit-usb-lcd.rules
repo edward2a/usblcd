@@ -1,7 +1,9 @@
 ACTION!="add", GOTO="adafruit_usb_lcd_end"
-KERNEL=="ttyACM", SUBSYSTEMS=="usb", ACTION=="add", GOTO="adafruit_usb_lcd_start"
+SUBSYSTEMS=="usb", KERNEL=="ttyACM*", DRIVER=="cdc_acm", GOTO="adafruit_usb_lcd_start"
+
 
 LABEL="adafruit_usb_lcd_start"
-ATTRS{idVendor}=="239a", ATTRS{idProduct}=="0001", ATTR{bInterfaceClass}=="Communications", MODE="660", GROUP="plugdev", SYMLINK+="usblcd"
+ACTION=="add", ATTRS{idVendor}=="239a", ATTRS{idProduct}=="0001", MODE="660", GROUP="plugdev", SYMLINK+="usblcd"
 
 LABEL="adafruit_usb_lcd_end"
+
